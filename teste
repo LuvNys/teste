@@ -1,0 +1,273 @@
+--Loading
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+--Main Janela
+local Window = OrionLib:MakeWindow({Name = "LoS - Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "Luv"})
+
+--Variaveis
+_G.AutoXP = false
+_G.AutoGems = false
+_G.AutoRebirth = false
+_G.AutoBuy = false
+_G.Choice = ""
+_G.RaceWin = ""
+
+--Function
+function AutoExp()
+    while _G.AutoXP == true do
+        -- City
+        local A_1 = "collectOrb"
+        local A_2 = "Red Orb"
+        local A_3 = "City"
+        local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+        Event:FireServer(A_1, A_2, A_3)
+        --Snow City
+        local A_1 = "collectOrb"
+        local A_2 = "Red Orb"
+        local A_3 = "Snow City"
+        local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+        Event:FireServer(A_1, A_2, A_3)
+        -- Magma City
+        local A_1 = "collectOrb"
+        local A_2 = "Red Orb"
+        local A_3 = "Magma City"
+        local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+        Event:FireServer(A_1, A_2, A_3)
+        wait(0.1)
+    end  
+end
+
+function AutoGem()
+    while _G.AutoGems == true do
+        --City 
+        local A_1 = "collectOrb"
+        local A_2 = "Gem"
+        local A_3 = "City"
+        local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+        Event:FireServer(A_1, A_2, A_3)
+
+        --Snow City
+        local A_1 = "collectOrb"
+        local A_2 = "Gem"
+        local A_3 = "Snow City"
+        local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+        Event:FireServer(A_1, A_2, A_3)
+
+        --Magma City
+        local A_1 = "collectOrb"
+        local A_2 = "Gem"
+        local A_3 = "Magma City"
+        local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+        Event:FireServer(A_1, A_2, A_3)
+        wait(0.1)
+    end
+    
+end
+
+function AutoReb()
+    while _G.AutoRebirth == true do
+        local A_1 = "rebirthRequest"
+        local Event = game:GetService("ReplicatedStorage").rEvents.rebirthEvent
+        Event:FireServer(A_1)
+        wait(5)    
+    end
+    
+end
+
+function AutoBuyz()
+    while _G.AutoBuy == true do
+        local A_1 = "openCrystal"
+        local A_2 = _G.Choice
+        local Event = game:GetService("ReplicatedStorage").rEvents.openCrystalRemote
+        Event:InvokeServer(A_1, A_2)
+         wait(0.1)
+    end 
+end
+
+function TeleportRaces()
+    if _G.RaceWin == 1 then
+        local p1 = game.Players.LocalPlayer.Character.HumanoidRootPart
+        p1.CFrame = game:GetService("Workspace").raceMaps.Grassland.finishPart.CFrame
+    end
+
+    if _G.RaceWin == 2 then
+        local p1 = game.Players.LocalPlayer.Character.HumanoidRootPart
+        p1.CFrame = game:GetService("Workspace").raceMaps.Desert.finishPart.CFrame
+    end
+
+    if _G.RaceWin == 3 then
+        local p1 = game.Players.LocalPlayer.Character.HumanoidRootPart
+        p1.CFrame = game:GetService("Workspace").raceMaps.Magma.finishPart.CFrame
+    end
+end
+
+-- Janela Player
+local Player = Window:MakeTab({
+	Name = "Player",
+	Icon = "",
+	PremiumOnly = false
+})
+
+Player:AddToggle({
+	Name = "Auto EXP",
+	Default = false,
+	Callback = function(Value)
+		_G.AutoXP = Value
+        AutoExp()
+	end    
+})
+
+Player:AddToggle({
+	Name = "Auto Gems",
+	Default = false,
+	Callback = function(Value)
+		_G.AutoGems = Value
+        AutoGem()
+	end    
+})
+
+Player:AddToggle({
+	Name = "Auto Rebirth",
+	Default = false,
+	Callback = function(Value)
+		_G.AutoRebirth = Value
+        AutoReb()
+	end    
+})
+
+--------Janela Buy------------
+local Pet = Window:MakeTab({
+	Name = "Buy",
+	Icon = "",
+	PremiumOnly = false
+})
+
+local Section = Pet:AddSection({
+	Name = "Auto Buy Crystals"
+})
+
+---- Cristais ----
+Pet:AddToggle({
+	Name = "Red Crystals - 300 Gems",
+	Default = false,
+	Callback = function(Value)
+		_G.AutoBuy = Value
+        _G.Choice = "Red Crystal"
+        AutoBuyz()
+	end    
+})
+
+Pet:AddToggle({
+	Name = "Blue Crystals - 600 Gems",
+	Default = false,
+	Callback = function(Value)
+		_G.AutoBuy = Value
+        _G.Choice = "Blue Crystal"
+        AutoBuyz()
+	end    
+})
+
+Pet:AddToggle({
+	Name = "Purple Crystals - 1k Gems",
+	Default = false,
+	Callback = function(Value)
+		_G.AutoBuy = Value
+        _G.Choice = "Purple Crystal"
+        AutoBuyz()
+	end    
+})
+
+Pet:AddToggle({
+	Name = "Yellow Crystal - 1.2K Gems",
+	Default = false,
+	Callback = function(Value)
+		_G.AutoBuy = Value
+        _G.Choice = "Yellow Crystal"
+        AutoBuyz()
+	end    
+})
+
+Pet:AddToggle({
+	Name = "Lightning Crystal - 2.5K Gems",
+	Default = false,
+	Callback = function(Value)
+		_G.AutoBuy = Value
+        _G.Choice = "Lightning Crystal"
+        AutoBuyz()
+	end    
+})
+
+Pet:AddToggle({
+	Name = "Snow Crystal - 4k Gems",
+	Default = false,
+	Callback = function(Value)
+		_G.AutoBuy = Value
+        _G.Choice = "Snow Crystal"
+        AutoBuyz()
+	end    
+})
+
+Pet:AddToggle({
+	Name = "Inferno Crystal - 8k Gems",
+	Default = false,
+	Callback = function(Value)
+		_G.AutoBuy = Value
+        _G.Choice = "Inferno Crystal"
+        AutoBuyz()
+	end    
+})
+
+Pet:AddToggle({
+	Name = "Lava Crystal - 8K Gems",
+	Default = false,
+	Callback = function(Value)
+		_G.AutoBuy = Value
+        _G.Choice = "Lava Crystal"
+        AutoBuyz()
+	end    
+})
+
+Pet:AddToggle({
+	Name = "Electro Legends Crystal - 100k Gems",
+	Default = false,
+	Callback = function(Value)
+		_G.AutoBuy = Value
+        _G.Choice = "Electro Legends Crystal"
+        AutoBuyz()
+	end    
+})
+
+
+---Janelas Corrida ---
+local Races = Window:MakeTab({
+	Name = "Races",
+	Icon = "",
+	PremiumOnly = false
+})
+local Section = Races:AddSection({
+	Name = "Insta Win Races"
+})
+
+Races:AddButton({
+	Name = "Win Grassland",
+	Callback = function()
+      		_G.RaceWin = 1
+            TeleportRaces()
+  	end    
+})
+
+Races:AddButton({
+	Name = "Win Desert",
+	Callback = function()
+      		_G.RaceWin = 2
+            TeleportRaces()
+  	end    
+})
+
+Races:AddButton({
+	Name = "Win Magma",
+	Callback = function()
+      		_G.RaceWin = 3
+            TeleportRaces()
+  	end    
+})
