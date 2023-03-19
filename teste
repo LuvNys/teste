@@ -2,7 +2,7 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
 --Main Janela
-local Window = OrionLib:MakeWindow({Name = "LoS - Hub", HidePremium = false, SaveConfig = true, ConfigFolder = "Luv"})
+local Window = OrionLib:MakeWindow({Name = "Legends of Speed - Hub", HidePremium = false, IntroText = "Luv - Hub", SaveConfig = true, ConfigFolder = "Luv"})
 
 --Variaveis
 _G.AutoXP = false
@@ -34,6 +34,14 @@ function AutoExp()
         local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
         Event:FireServer(A_1, A_2, A_3)
         wait(0.1)
+        -- Desert
+        local A_1 = "collectOrb"
+        local A_2 = "Red Orb"
+        local A_3 = "Desert"
+        local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+        Event:FireServer(A_1, A_2, A_3)
+        wait(0.1)
+
     end  
 end
 
@@ -60,6 +68,14 @@ function AutoGem()
         local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
         Event:FireServer(A_1, A_2, A_3)
         wait(0.1)
+        -- Desert
+        local A_1 = "collectOrb"
+        local A_2 = "Gem"
+        local A_3 = "Desert"
+        local Event = game:GetService("ReplicatedStorage").rEvents.orbEvent
+        Event:FireServer(A_1, A_2, A_3)
+        wait(0.1)
+
     end
     
 end
@@ -269,5 +285,58 @@ Races:AddButton({
 	Callback = function()
       		_G.RaceWin = 3
             TeleportRaces()
+  	end    
+})
+
+--- Janela Teleport
+local Tp = Window:MakeTab({
+	Name = "Teleport",
+	Icon = "",
+	PremiumOnly = false
+})
+local Section = Tp:AddSection({
+	Name = "Teleports City"
+})
+Tp:AddButton({
+	Name = "City",
+	Callback = function()
+        local p1 = game.Players.LocalPlayer.Character.HumanoidRootPart
+        p1.CFrame = CFrame.new(-234.607452, 4.12686396, -131.475784)
+  	end    
+})
+
+Tp:AddButton({
+	Name = "Snow City",
+	Callback = function()
+        local p1 = game.Players.LocalPlayer.Character.HumanoidRootPart
+        p1.CFrame = CFrame.new(-490.71109, 18.1712646, 2426.09204)
+  	end    
+})
+
+Tp:AddButton({
+	Name = "Magma City",
+	Callback = function()
+        local p1 = game.Players.LocalPlayer.Character.HumanoidRootPart
+        p1.CFrame = CFrame.new(2029.2948, 76.1554489, 4384.72998)
+  	end    
+})
+
+Tp:AddButton({
+	Name = "Desert Teleport - 5 Ribirths",
+	Callback = function()
+        local p1 = game.Players.LocalPlayer.Character.HumanoidRootPart
+        p1.CFrame = CFrame.new(2511.08911, 15.0680733, 4353.38867)
+  	end    
+})
+
+local Section = Tp:AddSection({
+	Name = "Teleports Desert"
+})
+
+Tp:AddButton({
+	Name = "City Teleport",
+	Callback = function()
+        local p1 = game.Players.LocalPlayer.Character.HumanoidRootPart
+        p1.CFrame = CFrame.new(261.886658, 646.261169, -214.349289)
   	end    
 })
