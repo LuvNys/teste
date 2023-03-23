@@ -11,6 +11,9 @@ _G.AutoRebirth = false
 _G.AutoBuy = false
 _G.Choice = ""
 _G.RaceWin = ""
+_G.TpHoop = false
+_G.AutoHoops = false
+local number = 1
 
 --Function
 function AutoExp()
@@ -98,6 +101,24 @@ function AutoBuyz()
         Event:InvokeServer(A_1, A_2)
          wait(0.1)
     end 
+end
+
+function AutoHoops()
+    for x = 1, 27, 1 do
+        game:GetService("Workspace").Hoops:GetChildren()[x].CFrame = CFrame.new(-801.11792, 68.0768051, -381.271606)
+        wait(0.1)
+    end  
+end
+
+function PlayerHoop()
+    while _G.AutoHoops == true do
+        local p1 = game.Players.LocalPlayer.Character.HumanoidRootPart
+        p1.CFrame = CFrame.new(-801.11792, 78.0768051, -381.271606)
+
+        wait(0.7)
+        
+    end
+    
 end
 
 function TeleportRaces()
@@ -338,5 +359,31 @@ Tp:AddButton({
 	Callback = function()
         local p1 = game.Players.LocalPlayer.Character.HumanoidRootPart
         p1.CFrame = CFrame.new(261.886658, 646.261169, -214.349289)
+  	end    
+})
+
+
+
+-- Janela Hoops
+local Hoops = Window:MakeTab({
+	Name = "Hoops",
+	Icon = "",
+	PremiumOnly = false
+})
+
+Hoops:AddToggle({
+	Name = "Auto Hoops",
+	Default = false,
+	Callback = function(Value)
+		AutoHoops()
+        PlayerHoop()
+	end    
+})
+
+Hoops:AddButton({
+	Name = "Teleport to Hoops",
+	Callback = function()
+        local p1 = game.Players.LocalPlayer.Character.HumanoidRootPart
+        p1.CFrame = CFrame.new(-801.11792, 68.0768051, -381.271606)
   	end    
 })
